@@ -3,14 +3,13 @@ data "docker_registry_image" "consul" {
   name = "consul"
 }
 
-resource "random_pet" "pet_name" {
-  prefix = "consul"
-  length = 2
+resource "docker_image" "consul" {
+  name          = data.docker_registry_image.consul.name
+  pull_triggers = [data.docker_registry_image.consul.sha256_digest]
 }
-
 # Start a container
-resource "docker_container" "ubuntu" {
-  name     = random_pet.pet_name.id
+resource "docker_container" "consul" {
+  name     = "consul"
   hostname = "consul"
   image    = docker_image.consul.latest
 
@@ -18,7 +17,6 @@ resource "docker_container" "ubuntu" {
     container_path = "/Users/"
     host_path      = "/tmp/Users"
   }
-
 
   volumes {
     container_path = "/consul/data"
@@ -47,16 +45,19 @@ resource "docker_container" "ubuntu" {
     external = 8301
     protocol = "udp"
   }
+
   ports {
     internal = 8302
     external = 8302
     protocol = "tcp"
   }
+
   ports {
     internal = 8302
     external = 8302
     protocol = "upd"
   }
+
   ports {
     internal = 8400
     external = 8400
@@ -67,11 +68,13 @@ resource "docker_container" "ubuntu" {
     external = 8600
     protocol = "tcp"
   }
+
   ports {
     internal = 8600
     external = 8600
     protocol = "tcp"
   }
+
   ports {
     internal = 8600
     external = 53
