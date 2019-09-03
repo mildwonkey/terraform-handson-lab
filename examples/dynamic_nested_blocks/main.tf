@@ -13,21 +13,6 @@ resource "docker_container" "consul" {
   hostname = "consul"
   image    = docker_image.consul.latest
 
-  volumes {
-    container_path = "/Users/"
-    host_path      = "/tmp/Users"
-  }
-
-  volumes {
-    container_path = "/consul/data"
-    host_path      = "/tmp/consul-data"
-  }
-
-  volumes {
-    container_path = "/opt/example"
-    host_path      = "/tmp/example"
-  }
-
   ports {
     internal = 8300
     external = 8300
