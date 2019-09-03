@@ -49,8 +49,8 @@ resource "docker_container" "consul" {
     protocol = "tcp"
   }
   ports {
-    internal = 8600
-    external = 8600
+    internal = 8500
+    external = 8500
     protocol = "tcp"
   }
 
