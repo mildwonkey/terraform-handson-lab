@@ -7,6 +7,7 @@ resource "docker_image" "consul" {
   name          = data.docker_registry_image.consul.name
   pull_triggers = [data.docker_registry_image.consul.sha256_digest]
 }
+
 # Start a container
 resource "docker_container" "consul" {
   name     = "consul"
