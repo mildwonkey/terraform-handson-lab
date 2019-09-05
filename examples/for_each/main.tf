@@ -13,7 +13,6 @@ resource "docker_container" "webserver-01" {
   }
 }
 
-
 resource "docker_container" "webserver-02" {
   name  = "webserver-02"
   image = "nginx:latest"
@@ -29,6 +28,7 @@ resource "docker_container" "appserver-01" {
     name = docker_network.private_network.name
   }
 }
+
 resource "docker_container" "appserver-02" {
   name  = "appserver-02"
   image = "ubuntu:latest"
@@ -36,6 +36,7 @@ resource "docker_container" "appserver-02" {
     name = docker_network.private_network.name
   }
 }
+
 resource "docker_container" "appserver-03" {
   name  = "appserver-03"
   image = "ubuntu:latest"
