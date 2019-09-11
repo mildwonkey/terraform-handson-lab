@@ -1,7 +1,6 @@
 resource "docker_network" "private_network" {
   name   = "example-network"
   driver = "bridge"
-
 }
 
 # Run some containers!
